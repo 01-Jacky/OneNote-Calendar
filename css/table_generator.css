@@ -1,0 +1,15 @@
+body {
+    font: normal 15px Calibri;      /* This translates into 11px when copied into OneNote */
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 0 5px;
+}
+
+
