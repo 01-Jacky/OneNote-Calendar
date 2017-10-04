@@ -24,11 +24,13 @@ function getNextDay(date){
 }
 
 /** Based on the week the date falls on, return that week's Sunday date */
-function getSundayDate(date){
-    if(date.getDay() == 7) {
+function getPrevSundayDate(date){
+    day = date.getDay(0)
+    if(day == 7) {
         return date
+    } else {
+        return new Date(date.getTime() - day*(24 * 60 * 60 * 1000))
     }
-    return date
 }
 
 /** Returns date in string format mm/dd. Optional padding parameter (bool) to left pad with 0. */
@@ -47,8 +49,8 @@ function getMonthDateString(date, padding = false){
 }
 
 $(document).ready(function(){
-    var start_date = new Date("2017-09-24T12:00:00Z");
-    tableCreate(start_date);
+    var start_date = new Date("2017-09-28T12:00:00Z");
+    tableCreate(getPrevSundayDate(start_date));
 
     // Event listeners
     $('#tablecopybtn').click(function() {

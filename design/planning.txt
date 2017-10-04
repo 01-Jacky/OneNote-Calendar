@@ -1,0 +1,13 @@
+Completed:
+- Basic MVP with copy&paste feature
+
+Critical:
+- Pick first date
+- Copied popup
+
+Future Work:
+- Styling
+- Deployment
+- Quarter/Semester option
+- Flexible week option
+- Robust month/year option
