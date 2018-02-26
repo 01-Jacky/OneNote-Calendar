@@ -1,27 +1,45 @@
+/** Returns the date + 24 hours */
+function _getNextDay(date){
+    var tomorrow = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+    return tomorrow
+}
+
+/** Returns date in string format mm/dd. Optional padding parameter (bool) to left pad with 0. */
+function _getMonthDateString(date, padding = false){
+    var month = date.getMonth() + 1;        // Jan = 0 for getMonth()
+    var day = date.getDate();
+
+    if(padding == true){
+        while(String(month).length < 2)     // pad_len of 2 would be 09/30, 10/01, 10/02, ...
+            month = "0" + month;
+        while(String(day).length < 2)
+            day = "0" + day
+    }
+
+    return month + '/' + day
+}
+
 function tableCreate(startDate) {
-    var rows = 12,
+    var rows = 11,
         cols = 8;
         date = startDate;
-        week = 0;
+        week = 1;
+
+    var calendar = $('#calendar tbody')
+    calendar.empty()
 
     for(var i = 0; i < rows; i++) {
-        calendar = $('#calendar tbody')
         calendar.append('<tr></tr>');
         calendar.find('tr').eq(i).append('<td>' + week + '<br>&nbsp</td>');
         for(var j = 1; j < cols; j++) {
             // afaik there's no date formating functions in the date object
-            calendar.find('tr').eq(i).append('<td>' + getMonthDateString(date) + '<br>&nbsp</td>');
-            date = getNextDay(date)
+            calendar.find('tr').eq(i).append('<td>' + _getMonthDateString(date) + '<br>&nbsp</td>');
+            date = _getNextDay(date)
         }
         week += 1
     }
 }
 
-/** Returns the date + 24 hours */
-function getNextDay(date){
-    var tomorrow = new Date(date.getTime() + (24 * 60 * 60 * 1000));
-    return tomorrow
-}
 
 /** Based on the week the date falls on, return that week's Sunday date */
 function getPrevSundayDate(date){
@@ -33,24 +51,10 @@ function getPrevSundayDate(date){
     }
 }
 
-/** Returns date in string format mm/dd. Optional padding parameter (bool) to left pad with 0. */
-function getMonthDateString(date, padding = false){
-    var month = date.getMonth() + 1         // Jan = 0 for getMonth()
-    var day = date.getDate()
-
-    if(padding = true){
-        while(String(month).length < 2)     // pad_len of 2 would be 09/30, 10/01, 10/02, ...
-            month = "0" + month;
-        while(String(day).length < 2)
-            day = "0" + day
-    }
-
-    return month + '/' + day
-}
 
 $(document).ready(function(){
-    var start_date = new Date("2017-09-28T12:00:00Z");
-    tableCreate(getPrevSundayDate(start_date));
+    var start_date = new Date();
+    tableCreate(getPrevSundayDate(start_date));                     // By default give a 11-week calendar starting today
 
     // Event listeners
     $('#tablecopybtn').click(function() {
@@ -68,6 +72,16 @@ $(document).ready(function(){
         }
 
         window.getSelection().removeAllRanges();                    // Remove the selections
+    });
+
+
+    $('#datepicker').datepicker().on("input change", function (e){
+        console.log("Date changed: ", e.target.value);
+        var first_day = $("#datepicker").datepicker( "getDate" );
+        var start_date = first_day;
+
+        var calendar = $('#calendar tbody')
+        tableCreate(getPrevSundayDate(start_date));
     });
 
     // alternatively don't use jquery for event listener...

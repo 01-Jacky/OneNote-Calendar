@@ -3,18 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>OneNote Calendar</title>
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/table_generator.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript" src="js/table_generator.js" defer></script>
 </head>
 <body>
 
-<div>
-  <h1 id="js-123">
-    Copy & paste into OneNote
-    <button id="tablecopybtn"><i class="material-icons js-emailcopybtn">content_copy</i></button>
-  </h1>
+<header class="header">
+  <h1>11-week school quarter template for OneNote</h1>
+  <div class="instructions-area">
+    <h1>1) 1st day of class: <input type="text" id="datepicker"></h1>
+    <h1>
+      2) Copy & paste into OneNote
+      <button id="tablecopybtn"><i class="material-icons js-emailcopybtn">content_copy</i></button>
+    </h1>
+  </div>
+</header>
+
+
+<div class="table-area">
   <table id="calendar">
     <thead>
       <tr>
