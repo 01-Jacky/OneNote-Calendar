@@ -9,8 +9,6 @@ Copy and paste into OneNote. Mark it up with your favorite OneNote tags!
 
 ![screenshot](img/calendar-demo.PNG "Copy, paste, ane edit!")
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
-
 
 
 
